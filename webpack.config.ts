@@ -17,12 +17,16 @@ const getConfig = (
         plugins: [
             new WebpackShellPluginNext({
                 onBuildStart: {
-                    scripts: ["yarn clean:dev && yarn clean:prod"],
+                    scripts: [
+                        "echo 'Webpack Start'",
+                        "rimraf build",
+                        "rimraf dist"
+                    ],
                     blocking: true,
                     parallel: false,
                 },
                 onBuildEnd: {
-                    scripts: ["yarn dev"],
+                    scripts: ["nodemon build/index.js --watch build"],
                     blocking: false,
                     parallel: true,
                 },
